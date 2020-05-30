@@ -6,6 +6,32 @@
   // TODO: build the swim command fetcher here
   //
 
+  const getSwimCommand = () => {
+    $.ajax({
+      type: 'Get',
+      url: serverUrl,
+      // data: formData,
+      // cache: false,
+      // contentType: false,
+      // processData: false,
+      // success: (data) => {
+      //   console.log('data' , data);
+      //   callback(data);
+      // },
+      success: (data) => {
+        console.log('data' , data);
+        SwimTeam.move(data);
+      },
+      error: (status) => {
+        console.error('Failed:', status);
+      }
+    });
+    setTimeout(getSwimCommand, 7000);
+  }
+
+  getSwimCommand();
+  // setInterval(getRandomSwimCommand, 10000);
+
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
   // Note: remember to fix the URL below.
@@ -17,12 +43,13 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
       success: () => {
         // reload the page
+        console.log('uploaded');
         window.location = window.location.href;
       }
     });
@@ -46,4 +73,4 @@
     ajaxFileUplaod(file);
   });
 
-})();
+}) ();
